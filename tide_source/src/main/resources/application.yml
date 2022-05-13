@@ -1,0 +1,7 @@
+server:
+  port: 8084
+
+apiclient:
+  bithumb:
+    asset:
+      url: http://localhost:8082

@@ -1,0 +1,6 @@
+rootProject.name = 'tide'
+include 'tide_source'
+include 'tide_destination'
+include 'tide_gateway'
+include 'tide_engine'
+include 'tide_common'

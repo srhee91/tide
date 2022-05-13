@@ -1,0 +1,28 @@
+server:
+  port: 8082
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: async
+          uri: http://localhost:8083
+          predicates:
+            - Path=/async/**
+          filters:
+#            - RewritePath=/async/(?<path>.*), /$\{path}
+            - AsyncFilter
+            - SetPath=/task/publish
+            - AddRequestHeader=async-option, TRUE
+        - id: sync
+          uri: http://localhost:8081
+          predicates:
+            - Path=/**
+          filters:
+            - AddRequestHeader=async-option, FALSE
